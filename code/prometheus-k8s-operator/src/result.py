@@ -4,12 +4,13 @@ from abc import ABC, abstractmethod
 from collections.abc import Callable
 from dataclasses import dataclass
 from functools import reduce
-from typing import Generic, Optional, Sequence, TypeVar, final
+from typing import Generic, Optional, ParamSpec, Sequence, TypeVar, final
 
-from .result_combinators import ResultCombinators
+from result_combinators import ResultCombinators
 
 E = TypeVar("E", covariant=True)
 A = TypeVar("A", covariant=True)
+P = ParamSpec("P")
 
 
 class Result(ABC, ResultCombinators, Generic[E, A]):
@@ -76,6 +77,13 @@ class Result(ABC, ResultCombinators, Generic[E, A]):
             return Ok(run())
         except Exception as e:
             return Err(on_error(e))
+
+    @staticmethod
+    def lift_safe[**P, E1, A1](f: Callable[P, A1], on_error: Callable[[Exception], E1]) -> Callable[P, Result[E1, A1]]:
+        def inner(*args: P.args, **kwargs: P.kwargs) -> Result[E1, A1]:
+            return Result.safe(lambda: f(*args, **kwargs), on_error)
+
+        return inner
 
     @staticmethod
     def optional[E1, A1](value: Optional[A1], on_missing: Callable[[], E1]) -> Result[E1, A1]:

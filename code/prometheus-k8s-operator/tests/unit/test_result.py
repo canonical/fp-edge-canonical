@@ -2,7 +2,7 @@
 
 import pytest
 
-from step2_functional.result import Err, Ok, Result
+from result import Err, Ok, Result
 
 # ---------------------------------------------------------------------------
 # map
@@ -430,3 +430,23 @@ def test_from_optional_none():
 
 def test_from_optional_falsy_value_is_ok():
     assert Result.optional(0, lambda: "missing") == Ok(0)
+
+
+# ---------------------------------------------------------------------------
+# lift_safe
+# ---------------------------------------------------------------------------
+
+
+def test_lift_safe_success():
+    safe_int = Result.lift_safe(int, str)
+    assert safe_int("42") == Ok(42)
+
+
+def test_lift_safe_failure():
+    safe_int = Result.lift_safe(int, lambda e: type(e).__name__)
+    assert safe_int("not a number") == Err("ValueError")
+
+
+def test_lift_safe_preserves_args():
+    safe_add = Result.lift_safe(lambda x, y: x + y, str)
+    assert safe_add(1, 2) == Ok(3)
