@@ -16,7 +16,7 @@ from ops.pebble import Layer
 from result import *
 
 
-def _apply_push(
+def apply_push(
     actions: ConfigActions, logger: Logger, config: PrometheusConf
 ) -> Result[ApplyError, None]:
     return (
@@ -26,7 +26,7 @@ def _apply_push(
     )
 
 
-def _apply_restart(actions: ConfigActions, layer: Layer) -> Result[ApplyError, None]:
+def apply_restart(actions: ConfigActions, layer: Layer) -> Result[ApplyError, None]:
     return actions.update_layer(layer).then(partial(actions.container_replan, layer))
 
 
@@ -35,13 +35,11 @@ def apply_handler(
 ) -> Result[ApplyError, None]:
     match outcome:
         case PushReload(config):
-            return _apply_push(actions, logger, config).then(actions.reload_config)
+            return apply_push(actions, logger, config).then(actions.reload_config)
         case PushRestart(config, layer):
-            return _apply_push(actions, logger, config).then(
-                partial(_apply_restart, actions, layer)
-            )
+            return apply_push(actions, logger, config).then(partial(apply_restart, actions, layer))
         case RestartOnly(layer):
-            return _apply_restart(actions, layer)
+            return apply_restart(actions, layer)
         case ContainerOffline():
             return Ok(actions.status_actions.set_maintenance())
         case Noop():

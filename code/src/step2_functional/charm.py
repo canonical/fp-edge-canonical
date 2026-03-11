@@ -27,7 +27,7 @@ from ops.model import (
     StatusBase,
 )
 from ops.pebble import Error as PebbleError
-from pipeline import process
+from process import process
 
 from charms.alertmanager_k8s.v1.alertmanager_dispatch import AlertmanagerConsumer
 from charms.prometheus_k8s.v0.prometheus_scrape import MetricsEndpointConsumer
