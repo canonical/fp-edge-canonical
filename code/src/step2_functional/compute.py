@@ -6,8 +6,10 @@ from typing import Any, FrozenSet, Mapping, Sequence, assert_never
 
 import yaml
 from cosl.time_validation import is_valid_timespec
+from error_types import *
+from input_types import *
 from ops.pebble import Layer
-from type_defs import *
+from output_types import *
 
 from charms.prometheus_k8s.v0.prometheus_scrape import PrometheusConfig
 from result import *

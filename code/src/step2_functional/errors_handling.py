@@ -1,28 +1,12 @@
 from __future__ import annotations
 
 from logging import Logger
-from typing import Protocol, assert_never
+from typing import assert_never
 
-from ops.pebble import Layer
-from type_defs import *
+from error_types import *
 
 from result import *
-
-
-class StatusActions(Protocol):
-    def set_active(self) -> None: ...
-
-    def set_maintenance(self) -> None: ...
-
-    def set_failed_config_gen(self, e: Exception) -> None: ...
-
-    def set_failed_config_push(self, e: Exception) -> None: ...
-
-    def set_failed_update_service(self, e: Exception) -> None: ...
-
-    def set_failed_replan(self, e: Exception, layer: Layer) -> None: ...
-
-    def set_failed_config_reload(self) -> None: ...
+from step2_functional.action_types import StatusActions
 
 
 def handle_errors(status_actions: StatusActions, logger: Logger, error: ProcessError) -> None:

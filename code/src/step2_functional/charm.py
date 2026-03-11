@@ -11,9 +11,9 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Optional, Tuple, TypedDict, Union, cast
 
-from apply import make_config_actions
+from actions_impl import make_config_actions
 from cosl.time_validation import is_valid_timespec
-from fetch import make_config_fetcher
+from fetch_impl import make_config_fetcher
 from lightkube.core.client import Client
 from lightkube.core.exceptions import ApiError as LightkubeApiError
 from lightkube.resources.core_v1 import PersistentVolumeClaim, Pod

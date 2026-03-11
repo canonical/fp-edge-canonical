@@ -5,7 +5,7 @@ from logging import Logger
 
 from apply import ConfigActions, apply_handler
 from compute import compute
-from errors import handle_errors
+from errors_handling import handle_errors
 from fetch import ConfigSetupFetcher
 
 
