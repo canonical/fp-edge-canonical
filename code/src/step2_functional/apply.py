@@ -13,8 +13,9 @@ if TYPE_CHECKING:
     from charm import PrometheusCharm
 from ops.model import ActiveStatus, BlockedStatus, MaintenanceStatus, StatusBase
 from ops.pebble import Layer
-from result import *
 from type_defs import *
+
+from result import *
 
 
 class ConfigActions(Protocol):

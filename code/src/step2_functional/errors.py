@@ -4,8 +4,9 @@ from logging import Logger
 from typing import Protocol, assert_never
 
 from ops.pebble import Layer
-from result import *
 from type_defs import *
+
+from result import *
 
 
 class StatusActions(Protocol):
