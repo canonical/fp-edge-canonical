@@ -4,11 +4,11 @@ from functools import partial
 from typing import TYPE_CHECKING, Mapping
 
 import yaml
+from action_types import ConfigActions
+from charm import CONFIG_HASH_PATH, PROMETHEUS_CONFIG
 from error_types import *
 from errors_handling import StatusActions
-from step2_functional.action_types import ConfigActions
-from step2_functional.charm import CONFIG_HASH_PATH, PROMETHEUS_CONFIG
-from step2_functional.output_types import *
+from output_types import *
 
 if TYPE_CHECKING:
     from charm import PrometheusCharm

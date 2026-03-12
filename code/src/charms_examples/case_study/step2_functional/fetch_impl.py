@@ -3,14 +3,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from error_types import *
-from step2_functional.fetch import ConfigSetupFetcher
+from fetch import ConfigSetupFetcher
 
 from result import *
 
 if TYPE_CHECKING:
     from charm import PrometheusCharm
+from charm import CONFIG_HASH_PATH
 from input_types import *
-from step2_functional.charm import CONFIG_HASH_PATH
 
 
 class _PrometheusConfigSetupFetcher:

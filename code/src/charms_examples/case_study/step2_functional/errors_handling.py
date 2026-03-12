@@ -3,8 +3,8 @@ from __future__ import annotations
 from logging import Logger
 from typing import assert_never
 
+from action_types import StatusActions
 from error_types import *
-from step2_functional.action_types import StatusActions
 
 from result import *
 

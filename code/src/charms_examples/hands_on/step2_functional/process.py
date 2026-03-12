@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from fetch import PasswordFetcher
-
-from charms_examples.hands_on.step2_functional.action_types import PasswordActions
+from action_types import *
+from fetch import *
 
 
 def process(fetcher: PasswordFetcher, actions: PasswordActions) -> None: ...

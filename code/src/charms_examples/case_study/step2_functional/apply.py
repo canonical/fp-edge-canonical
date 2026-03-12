@@ -4,10 +4,10 @@ from functools import partial
 from logging import Logger
 from typing import assert_never
 
+from action_types import *
 from error_types import *
 from ops.pebble import Layer
-from step2_functional.action_types import ConfigActions
-from step2_functional.output_types import *
+from output_types import *
 
 from result import *
 
